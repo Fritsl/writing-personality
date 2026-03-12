@@ -95,10 +95,6 @@ app.get('/api/export-persona', (req, res) => {
   const name = req.query.name || 'Extracted Persona';
   const { features, featureSummary, qualitativeAnalysis, systemPrompt, originalText } = currentProfile;
 
-  const spellingSection = features.spellingSubstitutions.length > 0
-    ? features.spellingSubstitutions.map(s => `- Write "${s.original}" instead of "${s.standard}" (seen ${s.count}x)`).join('\n')
-    : '_No consistent spelling quirks detected._';
-
   const sentencesSection = features.representativeSentences.length > 0
     ? features.representativeSentences.map(s => `> ${s}`).join('\n>\n')
     : '_No strongly stylistic sentences found._';
@@ -116,7 +112,7 @@ app.get('/api/export-persona', (req, res) => {
 ## How to Implement This Persona
 
 1. **Copy the System Prompt** (Section 3 below) into your LLM's system message — it works with any model (Mistral, OpenAI, Claude, etc.)
-2. **That's it.** The system prompt contains all quantitative rules, spelling quirks, qualitative description, and example sentences baked in.
+2. **That's it.** The system prompt contains all quantitative rules, qualitative description, and example sentences baked in.
 3. For fine-tuning or custom implementations, use the individual sections below as structured data.
 
 ---
@@ -150,13 +146,7 @@ ${rulesSection}
 
 ---
 
-## 2. Spelling Substitutions
-
-${spellingSection}
-
----
-
-## 3. Ready-to-Use System Prompt
+## 2. Ready-to-Use System Prompt
 
 Copy this entire block as your LLM system message:
 
@@ -166,7 +156,7 @@ ${systemPrompt}
 
 ---
 
-## 4. Qualitative Style Description
+## 3. Qualitative Style Description
 
 AI-generated analysis of the writing voice:
 
@@ -174,7 +164,7 @@ ${qualitativeAnalysis}
 
 ---
 
-## 5. Representative Sentences
+## 4. Representative Sentences
 
 The most stylistically distinctive sentences from the original sample:
 
@@ -182,7 +172,7 @@ ${sentencesSection}
 
 ---
 
-## 6. Original Writing Sample
+## 5. Original Writing Sample
 
 The source text this persona was extracted from:
 
