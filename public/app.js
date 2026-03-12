@@ -40,6 +40,7 @@ function showResults(data) {
   // Show comparison panel
   document.getElementById('original-text').textContent = data.originalText;
   document.getElementById('cleaned-text').textContent = data.cleanedText;
+  document.getElementById('detected-language').textContent = data.language ? `(${data.language})` : '';
   document.getElementById('comparison-panel').classList.remove('hidden');
 
   // Show profile panel

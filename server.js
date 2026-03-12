@@ -24,18 +24,23 @@ app.post('/api/analyze', async (req, res) => {
       return res.status(400).json({ error: 'Please provide at least a few sentences of text.' });
     }
 
-    // Run normalization and style analysis in parallel
+    // Detect language first — it gates the entire pipeline
+    const { language, code: languageCode } = await mistral.detectLanguage(text);
+
+    // Run normalization and style analysis in parallel (both use detected language)
     const [cleanedText, qualitativeAnalysis] = await Promise.all([
-      mistral.normalize(text),
-      mistral.analyzeStyle(text),
+      mistral.normalize(text, language),
+      mistral.analyzeStyle(text, language),
     ]);
 
     // Build the profile
-    currentProfile = buildProfile(text, cleanedText, qualitativeAnalysis);
+    currentProfile = buildProfile(text, cleanedText, qualitativeAnalysis, language);
 
     res.json({
       originalText: text,
       cleanedText,
+      language,
+      languageCode,
       features: currentProfile.features,
       featureSummary: currentProfile.featureSummary,
       qualitativeAnalysis,
