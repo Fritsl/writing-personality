@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Personality Capture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Writing Personality Capture</h1>
+    <p class="subtitle">Extract someone's writing style and make a chatbot speak like them</p>
+  </header>
+
+  <main>
+    <!-- Panel 1: Input -->
+    <section id="input-panel" class="panel">
+      <h2>1. Paste Writing Samples</h2>
+      <p class="hint">Paste 3-5 paragraphs of natural writing. Different topics work best — the system captures <em>style</em>, not content.</p>
+      <textarea id="input-text" placeholder="paste text here... the more personality the better --- dashes, missing commas, weird spelling... all of it gets captured
+
+try writing about different stuff so the system can tell what's style vs what's topic-specific"></textarea>
+      <button id="analyze-btn" onclick="analyze()">Analyze Writing Style</button>
+      <div id="analyze-status" class="status"></div>
+    </section>
+
+    <!-- Panel 2: Comparison -->
+    <section id="comparison-panel" class="panel hidden">
+      <h2>2. Original vs Normalized</h2>
+      <p class="hint">Left: your original text. Right: how an AI "cleans" it. The differences = your personality.</p>
+      <div class="comparison">
+        <div class="compare-col">
+          <h3>Original</h3>
+          <div id="original-text" class="text-display"></div>
+        </div>
+        <div class="compare-col">
+          <h3>AI-Normalized</h3>
+          <div id="cleaned-text" class="text-display"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 3: Profile -->
+    <section id="profile-panel" class="panel hidden">
+      <h2>3. Extracted Style Profile</h2>
+      <div class="profile-grid">
+        <div class="profile-section">
+          <h3>Quantitative Features</h3>
+          <ul id="feature-list"></ul>
+        </div>
+        <div class="profile-section">
+          <h3>AI Style Analysis</h3>
+          <div id="qualitative-analysis"></div>
+        </div>
+        <div class="profile-section">
+          <h3>Representative Sentences</h3>
+          <div id="representative-sentences"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel 4: Chat -->
+    <section id="chat-panel" class="panel hidden">
+      <h2>4. Chat with the Styled Bot</h2>
+      <div class="chat-controls">
+        <label class="toggle">
+          <input type="checkbox" id="style-toggle" checked onchange="toggleStyle()">
+          <span class="toggle-label">Style ON</span>
+        </label>
+        <span id="style-status" class="style-on">Writing in captured style</span>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

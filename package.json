@@ -1,0 +1,13 @@
+{
+  "name": "writing-personality",
+  "version": "1.0.0",
+  "description": "Extract and replicate writing personality using LLM diff analysis",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.4.5"
+  }
+}
