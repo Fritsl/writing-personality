@@ -26,12 +26,14 @@ app.post('/api/analyze', async (req, res) => {
 
     // Detect language first — it gates the entire pipeline
     const { language, code: languageCode } = await mistral.detectLanguage(text);
+    console.log('[ANALYZE] Detected language:', language, languageCode);
 
     // Run normalization and style analysis in parallel (both use detected language)
     const [cleanedText, qualitativeAnalysis] = await Promise.all([
       mistral.normalize(text, language),
       mistral.analyzeStyle(text, language),
     ]);
+    console.log('[ANALYZE] Raw normalized (first 200 chars):', cleanedText.slice(0, 200));
 
     // Build the profile
     currentProfile = buildProfile(text, cleanedText, qualitativeAnalysis, language);
