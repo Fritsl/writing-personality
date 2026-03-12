@@ -200,7 +200,7 @@ app.get('/api/export-style-fragment', (req, res) => {
     return res.status(404).json({ error: 'No profile loaded.' });
   }
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-  res.send(currentProfile.systemPrompt);
+  res.send(currentProfile.promptFragment);
 });
 
 app.listen(PORT, () => {
