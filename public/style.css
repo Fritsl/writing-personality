@@ -374,6 +374,41 @@ button:disabled {
   to { transform: rotate(360deg); }
 }
 
+/* Export Row */
+.export-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #1e1e30;
+}
+
+.export-row input {
+  flex: 1;
+  max-width: 300px;
+  background: #0a0a12;
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+  color: #d0d0d0;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+}
+
+.export-row input:focus {
+  outline: none;
+  border-color: #7c8cf8;
+}
+
+.export-btn {
+  background: #4a9c6d;
+  margin-top: 0;
+}
+
+.export-btn:hover {
+  background: #3d8a5e;
+}
+
 /* Responsive */
 @media (max-width: 700px) {
   .comparison, .profile-grid {

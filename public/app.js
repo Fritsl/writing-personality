@@ -171,3 +171,9 @@ function escapeHtml(text) {
   div.textContent = text;
   return div.innerHTML;
 }
+
+function exportPersona() {
+  const name = document.getElementById('persona-name').value.trim() || 'Extracted Persona';
+  const url = `/api/export-persona?name=${encodeURIComponent(name)}`;
+  window.location.href = url;
+}
