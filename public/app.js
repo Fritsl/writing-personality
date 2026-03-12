@@ -177,3 +177,18 @@ function exportPersona() {
   const url = `/api/export-persona?name=${encodeURIComponent(name)}`;
   window.location.href = url;
 }
+
+async function copyForGdprChat() {
+  const btn = document.getElementById('copy-gdprchat-btn');
+  try {
+    const res = await fetch('/api/export-style-fragment');
+    if (!res.ok) throw new Error('No profile loaded');
+    const text = await res.text();
+    await navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy for GDPR Chat'; }, 2000);
+  } catch (err) {
+    btn.textContent = 'Error — analyze first';
+    setTimeout(() => { btn.textContent = 'Copy for GDPR Chat'; }, 2000);
+  }
+}

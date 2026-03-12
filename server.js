@@ -187,6 +187,15 @@ ${originalText}
   res.send(md);
 });
 
+// GET /api/export-style-fragment — Return just the system prompt fragment for pasting into GDPRchat
+app.get('/api/export-style-fragment', (req, res) => {
+  if (!currentProfile) {
+    return res.status(404).json({ error: 'No profile loaded.' });
+  }
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.send(currentProfile.systemPrompt);
+});
+
 app.listen(PORT, () => {
   console.log(`Writing Personality server running at http://localhost:${PORT}`);
 });
