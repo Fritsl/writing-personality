@@ -6,7 +6,7 @@ const { buildProfile } = require('./lib/style-profiler');
 const { createStyledMessages, createCleanMessages } = require('./lib/style-applicator');
 
 const app = express();
-const PORT = process.env.PORT || 3456;
+const PORT = process.env.PORT || 3002;
 
 app.use(express.json({ limit: '1mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
